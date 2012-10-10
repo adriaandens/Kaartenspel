@@ -20,7 +20,7 @@ namespace KaartConsoleApp
 
         public void LaatsteKaartGetrokken(object sender, KaartEventArgs e)
         {
-            Console.WriteLine("o hai, laatste kaart getrokken: {0}", e.LaatsteKaart.ToString());
+            Console.WriteLine("\to hai, laatste kaart getrokken: {0}", e.LaatsteKaart.ToString());
         }
 
 
@@ -36,14 +36,14 @@ namespace KaartConsoleApp
             Console.WriteLine("Origineel");
             foreach (Kaart k in r)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
 
             Array.Sort(r);
             Console.WriteLine("Na sorteren (Harten, Ruiten, Schoppen en Klaveren)");
             foreach (Kaart k in r)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Met Comparer (Schoppen, Ruiten, Harten en Klaveren)");
             Types[] t = { Types.Schoppen, Types.Ruiten, Types.Harten, Types.Klaveren };
@@ -51,7 +51,7 @@ namespace KaartConsoleApp
             Array.Sort(r, c);
             foreach (Kaart k in r)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Met Comparer (Ruiten, Schoppen, Klaveren)");
             Types[] z = { Types.Ruiten, Types.Schoppen, Types.Klaveren };
@@ -59,34 +59,34 @@ namespace KaartConsoleApp
             Array.Sort(r, e);
             foreach (Kaart k in r)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Kaartspel");
             KaartSpel spel = new KaartSpel();
             foreach (Kaart k in spel.Kaarten)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Kaartspel geeft de vierde terug...");
-            Console.WriteLine(spel[3]);
+            Console.WriteLine("\t" + spel[3]);
             Console.WriteLine("Kaartspel voeg Schoppen Vier toe");
             spel.VoegKaartToe(new Kaart(Types.Schoppen, Waardes.Vier, false));
             foreach (Kaart k in spel.Kaarten)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Kaartspel sorteren...");
             spel.Sort(null);
             foreach (Kaart k in spel.Kaarten)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Kaartspel sorteren met icomparer");
             Types[] p = { Types.Klaveren, Types.Ruiten, Types.Harten, Types.Schoppen };
             spel.Sort(new KaartComparer(p));
             foreach (Kaart k in spel.Kaarten)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.WriteLine("Een event laten afvuren............................................");
             Program az = new Program(spel);
@@ -96,7 +96,12 @@ namespace KaartConsoleApp
             }
             foreach (Kaart k in spel.Kaarten)
             {
-                Console.WriteLine(k.ToString());
+                Console.WriteLine("\t" + k.ToString());
+            }
+            Console.WriteLine("Foreach met een kaartspel object");
+            foreach (Kaart k in spel)
+            {
+                Console.WriteLine("\t" + k.ToString());
             }
             Console.ReadKey();
         }

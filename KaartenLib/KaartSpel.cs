@@ -81,6 +81,9 @@ namespace KaartenLib
 
         public void VoegKaartToe(Kaart k) //Voeg Exceptions toe!
         {
+            if (k == null) {
+                throw new InvalidCardException("You passed in null, that's not gonna work...");
+            }
             Kaarten.Add(k);
             aantalKaartenVanType[k.Type]++;
             AantalKaarten++;
@@ -88,6 +91,9 @@ namespace KaartenLib
 
         public void VoegKaartenToe(IEnumerable<Kaart> kn) //Voeg Exceptions toe!
         {
+            if (kn == null || kn.Count() == 0) {
+                throw new InvalidCardException("Your Enumerable was empty or equal to null");
+            }
             foreach (Kaart k in kn)
             {
                 Kaarten.Add(k);
@@ -98,6 +104,9 @@ namespace KaartenLib
 
         public Kaart TrekRandomKaart()
         {
+            if (Kaarten.Count <= 0) {
+                throw new NoCardsLeftException("There are no cards left in the KaartSpel");
+            }
             Random r = new Random();
             //TODO: Checken of er wel kaarten zijn :d
             int g = r.Next(0, Kaarten.Count());
@@ -108,7 +117,7 @@ namespace KaartenLib
             return k;
         }
 
-        public void kijkOfLaatsteKaart(Kaart kaart)
+        private void kijkOfLaatsteKaart(Kaart kaart)
         {
             Types type = (Types) 123; //Gewoon een niet valid enum type opgeven zodat ie straks faalt
             foreach (Types t in aantalKaartenVanType.Keys) {
@@ -127,6 +136,10 @@ namespace KaartenLib
 
         public Kaart TrekBovensteKaart()
         {
+            if (Kaarten.Count <= 0)
+            {
+                throw new NoCardsLeftException("There are no cards left in the KaartSpel");
+            }
             Kaart k = Kaarten.ElementAt(0);
             Kaarten.RemoveAt(0);
             aantalKaartenVanType[k.Type]--;
@@ -136,7 +149,7 @@ namespace KaartenLib
 
         public Kaart TrekKaart(int index)
         {
-            if (index >= 0 && index < Kaarten.Count())
+            if (index > 0 && index < Kaarten.Count())
             {
                 Kaart k = Kaarten.ElementAt(index);
                 Kaarten.RemoveAt(index);
@@ -144,7 +157,7 @@ namespace KaartenLib
                 kijkOfLaatsteKaart(k);
                 return k;
             }
-            else { return null; }
+            else { throw new InvalidCardException("You chose a card with an indexing smaller than zero or greater/equal to number of cards in the deck"); }
 
         }
 
@@ -191,12 +204,12 @@ namespace KaartenLib
 
         public IEnumerator<Kaart> GetEnumerator() //Want we willen ook gewoon foreach(Kaart k in kaartspel) {}
         {
-            throw new NotImplementedException();
+            return new KaartEnumerator(this);
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }

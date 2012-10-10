@@ -12,13 +12,6 @@ namespace KaartenLib
         public Waardes Waarde { get; set; }
         public bool KaartZichtbaar { get; set; }
 
-        public Kaart()
-        {
-            Type = Types.Harten;
-            Waarde = Waardes.Aas;
-            KaartZichtbaar = true;
-        }
-
         public Kaart(Types t, Waardes w, bool z)
         {
             Type = t;
@@ -26,10 +19,12 @@ namespace KaartenLib
             KaartZichtbaar = z;
         }
 
-        public int CompareTo(Kaart k) {
-            if ((int)k.Type > (int) Type) { return -1; }
+        public int CompareTo(Kaart k)
+        {
+            if ((int)k.Type > (int)Type) { return -1; }
             else if ((int)k.Type < (int)Type) { return 1; }
-            else {
+            else
+            {
                 //Types zijn gelijk, dus bvb 2 Harten -> Kijken naar de waarde van kaart.
                 if ((int)k.Waarde > (int)Waarde) { return -1; }
                 else if ((int)k.Waarde < (int)Waarde) { return 1; }

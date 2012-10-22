@@ -12,6 +12,7 @@
     <AssemblyName>KaartenLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvalidCardException.cs" />
     <Compile Include="KaartComparer.cs" />
     <Compile Include="KaartEnumerator.cs" />
     <Compile Include="KaartEventArgs.cs" />
     <Compile Include="KaartSpel.cs" />
+    <Compile Include="NoCardsLeftException.cs" />
     <Compile Include="Types.cs" />
     <Compile Include="Kaart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
